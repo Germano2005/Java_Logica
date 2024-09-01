@@ -64,8 +64,7 @@ public class Trabalho_logica
             {
                 cont_carro[0]++;
             }
-            else 
-            if(c == 1)
+            else if(c == 1)
             {
                 cont_carro[1]++;
             }
@@ -78,8 +77,7 @@ public class Trabalho_logica
             {
                 cont_lavtipo[0]++;
             }
-            else 
-            if(l == 1)
+            else if(l == 1)
             {
                 cont_lavtipo[1]++;
             }
