@@ -8,7 +8,7 @@ public class Trabalho {
         int n, i = 0;
         Double val_total=0.0;
         int[] cont_carro = new int[3], cont_lavtipo = new int[3];
-        String[] nome, c_mais = new String[3], l_mais = new String[3];
+        String[] nome;
         double[][] preco = {{50.00,70.00,90.00},{70.00,90.00,110.00},{90.00,110.00,130.00}};
         char pergunta;
         
@@ -73,33 +73,27 @@ public class Trabalho {
             if(c[i] == 0)
             {
                 cont_carro[0]++;
-                c_mais[0] = carro[0];
             }
             else if(c[i] == 1)
             {
                 cont_carro[1]++;
-                c_mais[1] = carro[1];
             }
             else
             {
                 cont_carro[2]++;
-                c_mais[2] = carro[2];
             }
             
             if(l[i] == 0)
             {
                 cont_lavtipo[0]++;
-                l_mais[0] = lavtipo[0];
             }
             else if(l[i] == 1)
             {
                 cont_lavtipo[1]++;
-                l_mais[1] = lavtipo[1];
             }
             else
             {
                 cont_lavtipo[2]++;
-                l_mais[2] = lavtipo[2];
             }
 
             val_total = val_total + preco[c[i]][l[i]];
@@ -145,26 +139,28 @@ public class Trabalho {
         if (pergunta == 's' || pergunta == 'S') {
             System.out.println("Veículo(s) e serviço(s) que foi o mais atendido");
             System.out.println("--------------------------------------------------------------------");
-            mais_atendidos(c_mais, carro, l_mais, lavtipo);
+            mais_atendidos(cont_carro, carro, cont_lavtipo, lavtipo);
         }
             
         scan.close();
         scan1.close();
     }
     // Subprograma referente ao carro e veículo que foram mais atendidos
-    public static void mais_atendidos(String c_mais[], String carro[], String l_mais[], String lavtipo[]){
-        System.out.println("Carros");
-        for(int i = 0; i < 3; i++){
-            if (c_mais[i] == carro[i]) {
-                System.out.println("\t- " + carro[i]);
+    public static void mais_atendidos(int cont_carro[], String carro[], int cont_lavtipo[], String lavtipo[]){
+        int maxCarro = 0, maxLavtipo = 0;
+        for (int i = 1; i < cont_carro.length; i++) {
+            if (cont_carro[i] > cont_carro[maxCarro]) {
+                maxCarro = i;
             }
         }
-        System.out.println("Serviços");
-        for(int i = 0; i < 3; i++){
-            if (l_mais[i] == lavtipo[i]) {
-                System.out.println("\t- " + lavtipo[i]);
+        for (int i = 1; i < cont_lavtipo.length; i++) {
+            if (cont_lavtipo[i] > cont_lavtipo[maxLavtipo]) {
+                maxLavtipo = i;
             }
         }
+        System.out.println("Carro: " + carro[maxCarro]);
+        System.out.println("Serviço: " + lavtipo[maxLavtipo]);
+        
     }
     //Subprograma referente ao percentuais
     public static void percentuais(String carro[], String lavtipo[], int cont_carro[], int cont_lavtipo[], int n){
