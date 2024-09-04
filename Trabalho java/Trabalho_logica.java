@@ -88,6 +88,20 @@ public class Trabalho_logica
 
         }
 
+        for(i=0;i<n;i++)
+        {
+            System.out.print("\n\nRelação geral de clientes:");
+            System.out.println("\n-----------------------------------------------------------------------------------\n");
+            System.out.println(nome[i] + "\n\nCarro selecionado:\n" + carro[i] + "\n\nServiço selecionado:\n" + lavtipo[i] + "\n\nValor pago\n" + preco[i][i]);
+        }
+
+        System.out.println("\nEssa é a porcentagem de carro(s) pequeno(s) (populares): " + (cont_carro[0] = (cont_carro[0] * 100) / n) + "%");
+		System.out.println("\nEssa é a porcentagem de carro(s) médio(s) (SUV e Picape): " + (cont_carro[1] = (cont_carro[1] * 100) / n) + "%");
+		System.out.println("\nEssa é a porcentagem de carro(s) grande(s) (Van e micro-ônibus): " + (cont_carro[2] = (cont_carro[2] * 100) / n) + "%");
+        System.out.println("\nEssa é a porcentagem de serviço(s) de lavação interna : " + (cont_lavtipo[0] = (cont_lavtipo[0] * 100) / n) + "%");
+		System.out.println("\nEssa é a porcentagem de serviço(s) de lavação interna + lavação externa: " + (cont_lavtipo[1] = (cont_lavtipo[1] * 100) / n) + "%");
+		System.out.println("\nEssa é a porcentagem de serviço(s) de lavação interna + lavação externa + cera: " + (cont_lavtipo[2] = (cont_lavtipo[2] * 100) / n) + "%");
+
         anum_scan.close();
         nome_scan.close();
         carro_scan.close();
