@@ -1,22 +1,20 @@
 import java.util.Scanner;
-public class Trabalho3 {
-    
+public class Trabalho {
+
     public static void main(String[] args) {
-        
+        Scanner scan = new Scanner(System.in); // scan para ler numeros
+        Scanner scan1 = new Scanner(System.in); // scan para ler Strings
+
         int n, i = 0;
         Double val_total=0.0;
         int[] cont_carro = new int[3], cont_lavtipo = new int[3];
-        String[] nome;
+        String[] nome, c_mais = new String[3], l_mais = new String[3];
         double[][] preco = {{50.00,70.00,90.00},{70.00,90.00,110.00},{90.00,110.00,130.00}};
         char pergunta;
-        String v_mais = "", c_mais = "";
         
         
         String carro[] = {"Pequeno (populares)", "Médio (SUV e Picape)", "Grande (Van e micro-ônibus)"};
-        String lavtipo[] = {"Lavação externa", "Lavação externa + interna", "Lavação externa + interna + cera."};
-
-        Scanner scan = new Scanner(System.in);
-       
+        String lavtipo[] = {"Lavação externa", "Lavação externa + interna", "Lavação externa + interna + cera"};
 
         System.out.print("Informe o número de atendimentos a ser efetuado: ");
         n = scan.nextInt();
@@ -26,12 +24,13 @@ public class Trabalho3 {
         int[] l = new int[n];
 
         System.out.print("\033[H\033[2J");
+        
 
         //repetição por número de atendimentos
         for( i=0 ; i<n ; i++ )
         {
             System.out.print("Informe o nome do cliente: ");
-                nome[i] = scan.next();
+                nome[i] = scan1.nextLine();
             
             //tipo de carro
             do
@@ -74,40 +73,41 @@ public class Trabalho3 {
             if(c[i] == 0)
             {
                 cont_carro[0]++;
-                c_mais = carro[0];
+                c_mais[0] = carro[0];
             }
             else if(c[i] == 1)
             {
                 cont_carro[1]++;
-                c_mais = carro[1];
+                c_mais[1] = carro[1];
             }
             else
             {
                 cont_carro[2]++;
-                c_mais = carro[2];
+                c_mais[2] = carro[2];
             }
             
             if(l[i] == 0)
             {
                 cont_lavtipo[0]++;
-                v_mais = lavtipo[0];
+                l_mais[0] = lavtipo[0];
             }
             else if(l[i] == 1)
             {
                 cont_lavtipo[1]++;
-                v_mais = lavtipo[1];
+                l_mais[1] = lavtipo[1];
             }
             else
             {
                 cont_lavtipo[2]++;
-                v_mais = lavtipo[2];
+                l_mais[2] = lavtipo[2];
             }
 
             val_total = val_total + preco[c[i]][l[i]];
         }
-        System.out.print("\n\nRelação geral de clientes:");
+        System.out.print("\nRelação geral de clientes:");
         System.out.println("\n-----------------------------------------------------------------------------------\n");
 
+        //relação geral dos clientes
         for(i=0;i<n;i++){
             System.out.println(nome[i] + "\n\nCarro selecionado:\n" + carro[c[i]] + "\n\nServiço selecionado:\n" + lavtipo[l[i]] + "\n\nValor pago\n" + preco[c[i]][l[i]]);
             System.out.println("-------------------------------------------------------------");
@@ -118,17 +118,11 @@ public class Trabalho3 {
 
         System.out.print("\033[H\033[2J");
 
+        //percentuais
         if (pergunta == 's' || pergunta == 'S') {
             System.out.println("Percentuais");
             System.out.println("--------------------------------------------------------------------");
-            System.out.println("Carros");
-            System.out.println("\t- pequeno (populares): " + (cont_carro[0] = (cont_carro[0] * 100) / n) + "%");
-            System.out.println("\t- médio (SUV e Picape): " + (cont_carro[1] = (cont_carro[1] * 100) / n) + "%");
-		    System.out.println("\t- grande(s) (Van e micro-ônibus): " + (cont_carro[2] = (cont_carro[2] * 100) / n) + "%");
-            System.out.println("Serviços");
-            System.out.println("\t- lavação interna: " + (cont_lavtipo[0] = (cont_lavtipo[0] * 100) / n) + "%");
-            System.out.println("\t- lavação interna + lavação extrena: " + (cont_lavtipo[1] = (cont_lavtipo[1] * 100) / n) + "%");
-            System.out.println("\t- lavação interna + lavação extrena + cera: " + (cont_lavtipo[2] = (cont_lavtipo[2] * 100) / n) + "%");
+            percentuais(carro, lavtipo, cont_carro, cont_lavtipo, n);
         }
 
         System.out.print("\nClique em S para ver o total arrecadado: ");
@@ -136,6 +130,7 @@ public class Trabalho3 {
 
         System.out.print("\033[H\033[2J");
 
+        //Total arrecadado
         if (pergunta == 's' || pergunta == 'S') {
             System.out.println("Valor total arrecadado");
             System.out.println("--------------------------------------------------------------------");
@@ -150,10 +145,36 @@ public class Trabalho3 {
         if (pergunta == 's' || pergunta == 'S') {
             System.out.println("Veículo(s) e serviço(s) que foi o mais atendido");
             System.out.println("--------------------------------------------------------------------");
-            System.out.println("Veículo(s)" + c_mais);
-            System.out.println("Serviço(s)" + v_mais);
+            mais_atendidos(c_mais, carro, l_mais, lavtipo);
         }
             
         scan.close();
+        scan1.close();
+    }
+    // Subprograma referente ao carro e veículo que foram mais atendidos
+    public static void mais_atendidos(String c_mais[], String carro[], String l_mais[], String lavtipo[]){
+        System.out.println("Carros");
+        for(int i = 0; i < 3; i++){
+            if (c_mais[i] == carro[i]) {
+                System.out.println("\t- " + carro[i]);
+            }
+        }
+        System.out.println("Serviços");
+        for(int i = 0; i < 3; i++){
+            if (l_mais[i] == lavtipo[i]) {
+                System.out.println("\t- " + lavtipo[i]);
+            }
+        }
+    }
+    //Subprograma referente ao percentuais
+    public static void percentuais(String carro[], String lavtipo[], int cont_carro[], int cont_lavtipo[], int n){
+        System.out.println("Carros");
+        for(int i = 0; i < 3; i++){
+            System.out.println("\t- "+ carro[i] + ": " + (cont_carro[i] = (cont_carro[i] * 100) / n) + "%");
+        }
+        System.out.println("Serviços");
+        for(int i = 0; i < 3; i++){
+                System.out.println("\t- "+ lavtipo[i] + ": " + (cont_lavtipo[i] = (cont_lavtipo[i] * 100) / n) + "%");
+        }
     }
 }
