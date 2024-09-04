@@ -146,20 +146,27 @@ public class Trabalho {
         scan1.close();
     }
     // Subprograma referente ao carro e veículo que foram mais atendidos
-    public static void mais_atendidos(int cont_carro[], String carro[], int cont_lavtipo[], String lavtipo[]){
-        int maxCarro = 0, maxLavtipo = 0;
-        for (int i = 1; i < cont_carro.length; i++) {
-            if (cont_carro[i] > cont_carro[maxCarro]) {
-                maxCarro = i;
-            }
+    public static void mais_atendidos(int cont_carro[], String carro[], int cont_lavatipo[], String lavtipo[]){
+        System.out.println("Carros");
+        if (cont_carro[0] >= cont_carro[1] && cont_carro[0] >= cont_carro[2]) {
+            System.out.println("\t- "+carro[0]);
         }
-        for (int i = 1; i < cont_lavtipo.length; i++) {
-            if (cont_lavtipo[i] > cont_lavtipo[maxLavtipo]) {
-                maxLavtipo = i;
-            }
+        if (cont_carro[1] >= cont_carro[0] && cont_carro[1] >= cont_carro[2]) {
+            System.out.println("\t- "+carro[1]);
         }
-        System.out.println("Carro: " + carro[maxCarro]);
-        System.out.println("Serviço: " + lavtipo[maxLavtipo]);
+        if (cont_carro[2] >= cont_carro[0] && cont_carro[2] >= cont_carro[1]) {
+            System.out.println("\t- "+carro[2]);
+        }
+        System.out.println("Serviços");
+        if (cont_lavatipo[0] >= cont_lavatipo[1] && cont_lavatipo[0] >= cont_lavatipo[2]) {
+            System.out.println("\t- "+lavtipo[0]);
+        }
+        if (cont_lavatipo[1] >= cont_lavatipo[0] && cont_lavatipo[1] >= cont_lavatipo[2]) {
+            System.out.println("\t- "+lavtipo[1]);
+        }
+        if (cont_lavatipo[2] >= cont_lavatipo[0] && cont_lavatipo[2] >= cont_lavatipo[1]) {
+            System.out.println("\t- "+lavtipo[2]);
+        }
         
     }
     //Subprograma referente ao percentuais
