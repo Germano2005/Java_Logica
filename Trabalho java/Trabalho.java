@@ -98,17 +98,18 @@ public class Trabalho {
 
             val_total = val_total + preco[c[i]][l[i]];
         }
+        
+        //relação geral dos clientes
         System.out.print("\nRelação geral de clientes:");
         System.out.println("\n-----------------------------------------------------------------------------------\n");
 
-        //relação geral dos clientes
         for(i=0;i<n;i++){
             System.out.println(nome[i] + "\n\nCarro selecionado:\n" + carro[c[i]] + "\n\nServiço selecionado:\n" + lavtipo[l[i]] + "\n\nValor pago\n" + preco[c[i]][l[i]]);
             System.out.println("-------------------------------------------------------------");
         }
 
         System.out.print("\nClique em S para ver os percentuais: ");
-        pergunta = scan.next().charAt(0);
+        pergunta = scan1.next().charAt(0);
 
         System.out.print("\033[H\033[2J");
 
@@ -120,7 +121,7 @@ public class Trabalho {
         }
 
         System.out.print("\nClique em S para ver o total arrecadado: ");
-        pergunta = scan.next().charAt(0);
+        pergunta = scan1.next().charAt(0);
 
         System.out.print("\033[H\033[2J");
 
@@ -132,21 +133,35 @@ public class Trabalho {
         }
 
         System.out.print("\nClique em S para ver qual o tipo do veículo e o serviço que foram o mais atendidos: ");
-        pergunta = scan.next().charAt(0);
+        pergunta = scan1.next().charAt(0);
 
         System.out.print("\033[H\033[2J");
 
+        //Carro e serviço mais atendidos
         if (pergunta == 's' || pergunta == 'S') {
             System.out.println("Veículo(s) e serviço(s) que foi o mais atendido");
             System.out.println("--------------------------------------------------------------------");
             mais_atendidos(cont_carro, carro, cont_lavtipo, lavtipo);
+        }
+        
+        System.out.print("\nClique em S para fazer uma pesquisa especializada: ");
+        pergunta = scan1.next().charAt(0);
+
+        System.out.print("\033[H\033[2J");
+
+        //pesquisa especializada
+        if (pergunta == 's' || pergunta == 'S') {
+            System.out.println("Pesquisa especializada conforme o tipo de carro e serviço selecionado");
+            System.out.println("--------------------------------------------------------------------");
+            pesqfiltro(nome, carro, lavtipo, preco, i, i, pergunta, c, l);
         }
             
         scan.close();
         scan1.close();
     }
     // Subprograma referente ao carro e veículo que foram mais atendidos
-    public static void mais_atendidos(int cont_carro[], String carro[], int cont_lavatipo[], String lavtipo[]){
+    public static void mais_atendidos(int cont_carro[], String carro[], int cont_lavatipo[], String lavtipo[])
+    {
         System.out.println("Carros");
         if (cont_carro[0] >= cont_carro[1] && cont_carro[0] >= cont_carro[2]) {
             System.out.println("\t- "+carro[0]);
@@ -170,14 +185,69 @@ public class Trabalho {
         
     }
     //Subprograma referente ao percentuais
-    public static void percentuais(String carro[], String lavtipo[], int cont_carro[], int cont_lavtipo[], int n){
+    public static void percentuais(String carro[], String lavtipo[], int cont_carro[], int cont_lavtipo[], int n)
+    {
         System.out.println("Carros");
         for(int i = 0; i < 3; i++){
-            System.out.println("\t- "+ carro[i] + ": " + (cont_carro[i] = (cont_carro[i] * 100) / n) + "%");
+            System.out.println("\t- "+ carro[i] + ": " + ((cont_carro[i] * 100) / n) + "%");
+
         }
         System.out.println("Serviços");
         for(int i = 0; i < 3; i++){
-                System.out.println("\t- "+ lavtipo[i] + ": " + (cont_lavtipo[i] = (cont_lavtipo[i] * 100) / n) + "%");
+            System.out.println("\t- "+ lavtipo[i] + ": " + ((cont_lavtipo[i] * 100) / n) + "%");
+
         }
+    }
+    // subprograma referente a pesquisa personalizada
+    public static void pesqfiltro(String nome[], String carro[], String lav_tipo[], double preco[][], int carro_filtro, int lav_filtro, int n, int c[], int l[])
+    {
+        Scanner filtro = new Scanner(System.in);
+        
+        do
+        {
+            System.out.println("\nSendo os tipos de carro como:");
+            for(int x = 0; x < 3; x++)
+            {
+                System.out.println(carro[x]);
+            }
+            System.out.print("Informe o modelo do carro: ");
+            carro_filtro = filtro.nextInt()-1;
+
+            if(carro_filtro != 0 && carro_filtro != 1 && carro_filtro != 2)
+            {
+            System.out.println("\n\nOperação invalida!\n\n");
+            }
+                
+        } while(carro_filtro != 0 && carro_filtro != 1 && carro_filtro != 2);
+        
+        System.out.println("\nSendo os tipos de serviço como:");
+        for(int x = 0; x < 3; x++)
+        {
+            System.out.println(lav_tipo[x]);
+        }
+
+        do
+        {
+        System.out.print("Informe o tipo de lavação desejada: ");
+        lav_filtro = filtro.nextInt()-1;
+
+        if(lav_filtro != 0 && lav_filtro != 1 && lav_filtro != 2)
+        {
+            System.out.println("\n\nOperação invalida!\n\n");
+        }
+
+        } while(lav_filtro != 0 && lav_filtro != 1 && lav_filtro != 2);
+
+        for(int i=0;i<n;i++) 
+        {
+            if(c[i] == carro_filtro && l[i] == lav_filtro)
+            {
+                System.err.println("-------------------------------------------------------------");
+                System.out.println(nome[i] +  "\n\nValor pago\n" + preco[carro_filtro][lav_filtro]); // aqui ele vai mostra os preços conforme os filtros
+                System.out.println("-------------------------------------------------------------");
+            }
+        }
+        
+        filtro.close();
     }
 }
