@@ -1,3 +1,11 @@
+//Trabalho feito por Alunos: Leonardo Ferreira Damasio e Germano Dolwitsch Coelho
+
+
+
+
+
+
+
 import java.util.Scanner;
 public class Trabalho {
 
